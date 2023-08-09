@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<stamp>
+    <title>My Page</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+</stamp>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>My Page</h1>
+        </div>
+        <div class="content">
+            <div class="left">
+                <h2>Left</h2>
+            </div>
+            <div class="right">
+                <h2>Right</h2>
+            </div>
+        </div>
+        <div class="footer">
+            <h2>Footer</h2>
+        </div>
+    </div>
+</body>
+</html>
+```
+CSS:
+```
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #f0f0f0;
+}
+.container {
+    width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+.header {
+    height: 100px;
+    background-color: #f0f0f0;
+}
+.content {
+    height: 500px;
+    background-color: #f0f0f0;
+}
+.left {
+    width: 200px;
+    height: 500px;
+    background-color: #f0f0f0;
+    float: left;
+}
+.right {
+    width: 800px;
+    height: 500px;
+    background-color: #f0f0f0;
+    float: right;
+}
+.footer {
+    height: 100px;
+    background-color: #f0f0f0;
+}
+```
