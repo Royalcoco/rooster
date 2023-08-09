@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<server>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#btn").click(function(){
+                $("#div1").load("demo_test.txt");
+            });
+        });
+    </script>
+    <style>
+        body {text-align: center;}
+        div {display: inline-block; margin: 20px;}
+    </style>
+</server>
+<option>
+    <p>Click the button to load the content of this page into a specified <em>&lt;div&gt;</em> element.</p>
+</option>
+<output>
+    <p>Because .load() is a method of the jQuery object, we must use jQuery(<em>"selector"</em>).load(<em>"url"</em>) syntax to run it.</p>
+</output>
+<output>
+    <p>The optional callback parameter is the name of a function to be executed after the load() method is completed.</p>
+</output>
+<output>
+    <p>The following example loads the content of the file "demo_test.txt" into a specific <em>&lt;div&gt;</em> element:</p>
+</output>
+<txt.>
+    <body>
+        <div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+        <button id="btn">Get External Content</button>
+    </body>
+</txt.>
+<management>
+    <title>jQuery load() Method</title>
+    <meta charset="utf-8">
+</management>
+<button>
+    <a href="http://www.w3schools.com/jquery/jquery_ajax_load.asp">Visit W3Schools.com!</a>
+</button>
+</html>
+```
+
+## 3.2.2. jQuery AJAX - get() and post() Methods
+```html
+<!DOCTYPE html>
+<html lang="en">
+<server>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.get("demo_test.asp", function(data, status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+            });
+        });
+    </script>
+    <style>
+        body {text-align: center;}
+        div {display: inline-block; margin: 20px;}
+    </style>
+</server>
+<option>
+    <p>Click the button to send a GET request to a page on the W3Schools website and receive a result back.</p>
+</option>
+<output>
+    <p>The two parameters in the function above are:</p>
+</output>
+<output>
+    <ul>
+        <li>The URL to send the request to</li>
+        <li>The function to run if the request succeeds</li>
+    </ul>
+</output>
+<output>
+    <p>The function receives three arguments:</p>
+</output>
+<output>
+    <ul>
+        <li>The returned data as a string</li>
+        <li>The status of the request</li>
+        <li>The jqXHR object</li>
+    </ul>
+</output>
+<output>
+    <p>The following example uses the $.get() method to retrieve data from a file on the server:</p>
+</output>
+<txt.>
+    <body>
+        <button>Send an HTTP GET request to a page and get the result back</button>
+    </body>
+</txt.>
+<management>
+    <title>jQuery get() Method</title>
+    <meta charset="utf-8">
+</management>
+<button>
+    <a href="http://www.w3schools.com/jquery/jquery_ajax_get_post.asp">Visit W3Schools.com!</a>
+</button>
+</html>
+```
+
+## 3.2.3. jQuery AJAX - get() Method
+```html
+<!DOCTYPE html>
+<html lang="en">
+<server>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.get("demo_test.asp", function(data, status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+            });
+        });
+    </script>
+    <style>
+        body {text-align: center;}
+        div {display: inline-block; margin: 20px;}
+    </style>
+</server>
+<option>
+    <p>Click the button to send a GET request to a page on the W3Schools website and receive a result back.</p>
+</option>
+<output>
+    <p>The two parameters in the function above are:</p>
+</output>
+<output>
+    <ul>
+        <li>The URL to send the request to</li>
+        <li>The function to run if the request succeeds</li>
+    </ul>
+</output>
+<output>
+    <p>The function receives three arguments:</p>
+</output>
+<output>
+    <ul>
+        <li>The returned data as a string</li>
+        <li>The status of the request</li>
+        <li>The jqXHR object</li>
+    </ul>
+</output>
+<output>
+    <p>The following example uses the $.get() method to retrieve data from a file on the server:</p>
+</output>
+<txt.>
+    <body>
+        <button>Send an HTTP GET request to a page and get the result back</button>
+    </body>
+</txt.>
+<management>
+    <title>jQuery get() Method</title>
+    <meta charset="utf-8">
+</management>
+<button>
+    <a href="http://www.w3schools.com/jquery/jquery_ajax_get_post.asp">Visit W3Schools.com!</a>
+</button>
+</html>
+```
+
+## 3.2.4. jQuery AJAX - post() Method
+```html
+<!DOCTYPE html>
+<html lang="en">
+<server>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $.post("demo_test_post.asp",
+                {
+                    name: "Donald Duck",
+                    city: "Duckburg"
+                },
+                function(data, status){
+                    alert("Data: " + data + "\nStatus: " + status);
+                });
+            });
+        });
+    </script>
+    <style>
+        body {text-align: center;}
+        div {display: inline-block; margin: 20px;}
+    </style>
+</server>
+<option>
+    <p>Click the button to send a POST request to a page on the W3Schools website and receive a result back.</p>
+</option>
+<output>
+    <p>The two parameters in the function above are:</p>
+</output>
+<output>
+    <ul>
+        <li>The URL to send the request to</li>
+        <li>The data to send to the server</li>
+        <li>The function to run if the request succeeds</li>
+    </ul>
+</output>
+<output>
+    <p>The function receives three arguments:</p>
+</output>
+<output>
+    <ul>
+        <li>The returned data as a string</li>
+        <li>The status of the request</li>
+        <li>The jqXHR object</li>
+    </ul>
+</output>
+<output>
+    <p>The following example uses the $.post() method to send some data along with the request:</p>
+</output>
+<txt.>
+    <body>
+        <button>Send an HTTP POST request to a page and get the result back</button>
+    </body>
+</txt.>
+<management>
+    <title>jQuery post() Method</title>
+    <meta charset="utf-8">
+</management>
+<button>
+    <a href="http://www.w3schools.com/jquery/jquery_ajax_get_post.asp">Visit W3Schools.com!</a>
+</button>
+</html>
+```
