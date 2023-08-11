@@ -1,0 +1,285 @@
+<root>
+    <head>
+        <title>Test</title>
+    </head>
+    <body>
+        <div id="content">
+            <div id="header">
+                <h1>Test</h1>
+            </div>
+            <div id="main">
+                <div id="left">
+                    <div id="menu">
+                        <ul>
+                            <li><a href="#">Test</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="right">
+                    <div id="content">
+                        <p>Test</p>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <p>Test</p>
+            </div>
+        </div>
+    </body>
+</root>
+```
+I want to get the content of the div with id "content" in the div with id "right". I tried this:
+```
+$doc = new DOMDocument();
+$doc->loadHTMLFile("test.html");
+$xpath = new DOMXPath($doc);
+$elements = $xpath->query("//div[@id='content']");
+foreach ($elements as $element) {
+    echo $element->nodeValue;
+}
+```
+But this gives me the content of the div with id "content" in the div with id "header" and the div with id "content" in the div with id "right". How can I get only the content of the div with id "content" in the div with id "right"?
+FtDisenvy 2014-08-31: Use `$elements = $xpath->query("//div[@id='right']/div[@id='content']");` to select the `div` with `id` `content` inside the `div` with `id` `right`.
+You can also use `$elements = $xpath->query("//div[@id='right']//div[@id='content']");` to select the `div` with `id` `content` inside the `div` with `id` `right` or any of its descendants.
+See also: http://www.w3.org/TR/xpath/#path-abbrev
+> `<code>//</code>` is short for `<code>/descendant-or-self::node()/</code>`. For example, `<code>//para</code>` is short for `<code>/descendant-or-self::node()/child::para</code>` and so will select any para element in the document (even a para element that is a document element will be selected by `<code>//para</code>` since the document element node is a child of the root node); `<code>div//para</code>` is short for `<code>div/descendant-or-self::node()/child::para</code>` and so will select all para descendants of div children.
+> The location path `<code>//para[1]</code>` does not mean the same as the location path `<code>/descendant::para[1]</code>`. The latter selects the first descendant para element; the former selects all descendant para elements that are the first para children of their parents.
+> The location path `<code>//para[last()]</code>` does not mean the same as the location path `<code>/descendant::para[last()]</code>`. The latter selects the last para child of the last para child of the context node; the former selects all last para elements of para children of the context node.
+> The location path `<code>//para[position()=1]</code>` does not mean the same as the location path `<code>/descendant::para[position()=1]</code>`. The latter selects the first para child of the context node; the former selects all para elements that are the first para children of their parents.
+> The location path `<code>//para[position()=last()]</code>` does not mean the same as the location path `<code>/descendant::para[position()=last()]</code>`. The latter selects the last para child of the context node; the former selects all last para elements of their parents.
+> The location path `<code>//para[position()=last()-1]</code>` does not mean the same as the location path `<code>/descendant::para[position()=last()-1]</code>`. The latter selects the last but one para child of the context node; the former selects all last but one para elements of their parents.
+> The location path `<code>//para[position()&gt;1]</code>` does not mean the same as the location path `<code>/descendant::para[position()&gt;1]</code>`. The latter selects all para grandchildren of the context node for which there exists a para parent such that the grandparent is the second para child of its parent; the former selects all para elements that are not the first para child of their parents.
+> The location path `<code>//para[position()&gt;=1]</code>` does not mean the same as the location path `<code>/descendant::para[position()&gt;=1]</code>`. The latter selects all para grandchildren of the context node for which there exists a para parent; the former selects all para elements whatsoever.
+> The location path `<code>//para[1]/following-sibling::para[1]</code>` does not mean the same as the location path `<code>/descendant::para[1]/following-sibling::para[1]</code>`. The latter selects the first para element child of the context node, if any, that has a para following-sibling; the former selects all para elements that are the first para children of their parents, if any, that have a para following-sibling.
+> The location path `<code>//para[1]/following-sibling::node()[1]</code>` does not mean the same as the location path `<code>/descendant::para[1]/following-sibling::node()[1]</code>`. The latter selects the first node child of the first para child of the context node, if any, that has a following-sibling; the former selects all node children of para elements that are the first para children of their parents, if any, that have a following-sibling.
+> The location path `<code>//para[1]/self::para[1]</code>` does not mean the same as the location path `<code>/descendant::para[1]/self::para[1]</code>`. The latter selects the first para child of the context node, if any, that is a para element; the former selects all para elements that are the first para children of their parents, if any, that are para elements.
+> The location path `<code>//para[1]/child::para[1]</code>` does not mean the same as the location path `<code>/descendant::para[1]/child::para[1]</code>`. The latter selects the first para child of the context node, if any, that is a para element; the former selects all para elements that are the first para children of their parents, if any, that are para elements.
+> The location path `<code>//para[1]/descendant::para[1]</code>` does not mean the same as the location path `<code>/descendant::para[1]/descendant::para[1]</code>`. The latter selects the first para descendant of the first para child of the context node, if any, that is a para element; the former selects all para elements that are the first para children of their parents, if any, that are para elements.
+> The location path `<code>//olist/item[5]</code>` does not mean the same as the location path `<code>/descendant::olist/item[5]</code>`. The latter selects the fifth item child of the olist element children of the context node; the former selects all item elements that are the fifth item children of their parents.
+> The location path `<code>//chapter[title='Introduction']</code>` does not mean the same as the location path `<code>/descendant::chapter[title='Introduction']</code>`. The latter selects the chapter element children of the context node that have one or more title children with string-value equal to 'Introduction'; the former selects all chapter elements that have one or more title children with string-value equal to 'Introduction'.
+> The location path `<code>//appendix[title='Introduction']/chapter</code>` does not mean the same as the location path `<code>/descendant::appendix[title='Introduction']/chapter</code>`. The latter selects the chapter element children of the appendix element children of the context node that have one or more title children with string-value equal to 'Introduction'; the former selects all chapter elements that have one or more title children with string-value equal to 'Introduction' and that have an appendix parent.
+> The location path `<code>//para[@type='warning']</code>` does not mean the same as the location path `<code>/descendant::para[@type='warning']</code>`. The latter selects the para element children of the context node that have one or more type attribute children with string-value equal to 'warning'; the former selects all para elements that have one or more type attribute children with string-value equal to 'warning'.
+> The location path `<code>//olist/item[.//para]</code>` does not mean the same as the location path `<code>/descendant::olist/item[.//para]</code>`. The latter selects the item element children of the olist element children of the context node that have one or more para descendants; the former selects all item elements that have one or more para descendants.
+> The location path `<code>//para[.//footnote]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote]</code>`. The latter selects the para element children of the context node that have one or more footnote descendants; the former selects all para elements that have one or more footnote descendants.
+> The location path `<code>//para[.//footnote][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants.
+> The location path `<code>//para[.//footnote][position()=1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][position()=1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants.
+> The location path `<code>//para[.//footnote][1][.//para][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1][.//para][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants and that has one or more para descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants and that have one or more para descendants.
+> The location path `<code>//para[.//footnote][1][.//para][1][.//footnote][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1][.//para][1][.//footnote][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants.
+> The location path `<code>//para[.//footnote][1][.//para][1][.//footnote][1][.//para][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1][.//para][1][.//footnote][1][.//para][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants.
+> The location path `<code>//para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants.
+> The location path `<code>//para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants.
+> The location path `<code>//para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants.
+> The location path `<code>//para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1]</code>` does not mean the same as the location path `<code>/descendant::para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1]</code>`. The latter selects the first para child of the context node, if any, that has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants and that
+>   has one or more footnote descendants and that has one or more para descendants and that has one or more footnote descendants and that has one or more para descendants; the former selects all para elements that are the first para children of their parents, if any, that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants and that
+>   have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants and that have one or more para descendants and that have one or more footnote descendants.
+> The location path `<
+>   /para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1]
+>   >` does not mean the same as the location path `<
+>   /descendant::para[.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1][.//footnote][1][.//para][1]
+>   >`. The latter selects the first para child of the context node, if
+>   any, that has one or more footnote descendants and that has one or
+>   more para descendants and that has one or more footnote descendants
+>   and that has one or more para descendants and that has one or more
+>   footnote descendants and that has one or more para descendants and that
+>   has one or more footnote descendants and that has one or more para
+>   descendants and that has one or more footnote descendants; the former
+>   selects all para elements that are the first para children of their
+>   parents, if any, that have one or more footnote descendants and that
+>   have one or more para descendants and that have one or more footnote
+>   descendants and that have one or more para descendants and that have
+>   one or more footnote descendants and that have one or more para
+>   descendants and that have one or more footnote descendants and that
+>   have one or more para descendants and that have one or more footnote
+>   descendants.
+> The location path `<
+
+para>` is a relative location path. It always starts at
+the context node. It selects all para children of the context node, if
+any. The location path `<
+/descendant::para>` is an absolute location path. It always starts at
+the root node. It selects all para descendants of the root node, if
+any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any. The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+>
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+>
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+>
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+>
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+>
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+>
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+>
+> The location path `<code>/descendant::para</code>` is an absolute location path. It always starts at the root node. It selects all para descendants of the root node, if any.
+> The location path `<code>//para</code>` is a relative location path. It always starts at the context node. It selects all para descendants of the context node, if any.
+<issue_comment>username_0: Hi,
+I'm trying to use the following xpath to get the text of the first paragraph in a document:
+```
+//p[1]/text()
+```
+However, it returns an empty string. I'm using the following code to test it:
+```
+from lxml import etree
+from io import StringIO
+def parse(doc):
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(StringIO(doc), parser)
+    return tree
+doc = """<html>
+<body>
+<p>First paragraph</p>
+<p>Second paragraph</p>
+</body>
+</html>"""
+tree = parse(doc)
+print(tree.xpath('//p[1]/text()'))
+```
+I'm using lxml 4.2.1 and python 3.6.5. Any idea what I'm doing wrong?
+</issue_comment>
+</issue>
+<issue>
+<id>issue_1</id>
+<title>Issue 1</title>
+<description>Issue 1</description>
+<issue_comment>
+<username>username_1</username>
+<comment>Hi,
+I'm trying to use the following xpath to get the text of the first paragraph in a document:
+```
+//p[1]/text()
+```
+However, it returns an empty string. I'm using the following code to test it:
+```
+from lxml import etree
+from io import StringIO
+def parse(doc):
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(StringIO(doc), parser)
+    return tree
+doc = """<html>
+<body>
+<p>First paragraph</p>
+<p>Second paragraph</p>
+</body>
+</html>"""
+tree = parse(doc)
+print(tree.xpath('//p[1]/text()'))
+```
+I'm using lxml 4.2.1 and python 3.6.5. Any idea what I'm doing wrong?
+</comment>
+</issue_comment>
+</issue>
+</issues>
+```
+I want to extract the text of the first paragraph in each issue. I tried the following code:
+```
+from lxml import etree
+from io import StringIO
+def parse(doc):
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(StringIO(doc), parser)
+    return tree
+doc = """<html>
+<body>
+
+<issues>
+<issue>
+<id>issue_0</id>
+<title>Issue 0</title>
+<description>Issue 0</description>
+<issue_comment>
+<username>username_0</username>
+<comment>Hi,
+I'm trying to use the following xpath to get the text of the first paragraph in a document:
+```
+//p[1]/text()
+```
+However, it returns an empty string. I'm using the following code to test it:
+```
+from lxml import etree
+from io import StringIO
+
+def parse(doc):
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(StringIO(doc), parser)
+    return tree
+    doc = '''<?xml version="1.0" encoding="UTF-8"?>
+    <html>
+    <body>
+    <p>First paragraph</p>
+    <p>Second paragraph</p>
+    </body>
+    </html>'''
+    tree = parse(doc)
+    print(tree.xpath('//p[1]/text()'))
+```
+I'm using lxml 4.2.1 and python 3.6.5. Any idea what I'm doing wrong?
+```
+</comment>
+</issue_comment>
+</issue>
+<issue>
+<id>issue_1</id>
+<title>Issue 1</title>
+<description>Issue 1</description>
+<issue_comment>
+<username>username_1</username>
+<comment>Hi,
+I'm trying to use the following xpath to get the text of the first paragraph in a document:
+```
+//p[1]/text()
+```
+However, it returns an empty string. I'm using the following code to test it:
+```
+from lxml import etree
+from io import StringIO
+def parse(doc):
+    parser = etree.XMLParser(remove_blank_text=True)
+    tree = etree.parse(StringIO(doc), parser)
+    return tree
+doc = """<html>
+<body>
+<p>First paragraph</p>
+<p>Second paragraph</p>
+</body>
+</html>"""
+tree = parse(doc)
+print(tree.xpath('//p[1]/text()'))
+```
