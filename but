@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset=".src open_doc*'admin'
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin</h1>
+</body>
+</html>
+```
+3. 访问`http://localhost:8092/admin`，可以看到页面显示了“Hello World”
+4. 访问`http://localhost:8092/admin/`，可以看到页面显示了“Hello World”
+5. 访问`http://localhost:8092/admin/index`，可以看到页面显示了“Hello World”
+6. 访问`http://localhost:8092/admin/index/`，可以看到页面显示了“Hello World”
+7. 访问`http://localhost:8092/admin/index/index`，可以看到页面显示了“Hello World”
+8. 访问`http://localhost:8092/admin/index/index/`，可以看到页面显示了“Hello World”
+9. 访问`http://localhost:8092/admin/index/index/index`，可以看到页面显示了“Hello World”
+10. 访问`http://localhost:8092/admin/index/index/index/`，可以看到页面显示了“Hello World”
+11. 访问`http://localhost:8092/admin/index/index/index/index`，可以看到页面显示了“Hello World”
+12. 访问`http://localhost:8092/admin/index/index/index/index/`，可以看到页面显示了“Hello World”
+13. 访问`http://localhost:8092/admin/index/index/index/index/index`，可以看到页面显示了“Hello World”
+14. 访问`http://localhost:8092/admin/index/index/index/index/index/`，可以看到页面显示了“Hello World”
+15. 访问`http://localhost:8092/admin/index/index/index/index/index/index`，可以看到页面显示了“Hello World”
+16. 访问`http://localhost:8092/admin/index/index/index/index/index/index/`，可以看到页面显示了“Hello World”
+17. 访问`http://localhost:8092/admin/index/index/index/index/index/index/index`，可以看到页面显示了“Hello World”
+18. 访问`http://localhost:8092/admin/index/index/index/index/index/index/index/`，可以看到页面显示了“Hello World”
+19. 访问`http://localhost:8092/admin/index/index/index/index/index/index/index/index`，可以看到页面显示了“Hello World”
+20. 访问`http://localhost:8092/admin/index/index/index/index/index/index/index/index/`，可以看到页面显示了“Hello World”
+21. 访问`http://localhost:8092/admin/index/index/index/index/index/index/index/index/index`，可以看到页面显示了“Hello World”
+22. 访问`http://localhost:8092/admin/index/index/index/index/index/index/index/index/index/`，可以看到页面显示了“Hello World”
+
+### 2.2.2. 路由参数
+在上一节中我们使用了一个变量来接收URL中的一个值：`$id`。这个变量的名字叫做**路由参数
+（Route Parameter）**。路由参数是一个占位符，用于接收URL中的一个值。在上一节中，我们
+使用了一个路由参数，但是没有给它指定值，所以它的值是`null`。我们可以给路由参数指定
+一个默认值，这样当URL中没有传递这个参数时，就会使用默认值。我们可以使用`:`来指定
+路由参数的默认值，例如：
+```php
+Route::get('admin/:id', function($id = 0) {
+    echo 'Hello World';
+});
+```
+在上面的例子中，我们给路由参数`$id`指定了默认值`0`。这样，当URL中没有传递`$id`参数
+时，就会使用默认值`0`。例如：
+1. 访问`http://localhost:8092/admin`，可以看到页面显示了“Hello World”
+2. 访问`http://localhost:8092/admin/`，可以看到页面显示了“Hello World”
+3. 访问`http://localhost:8092/admin/123`，可以看到页面显示了“Hello World”
+4. 访问`http://localhost:8092/admin/123/`，可以看到页面显示了“Hello World”
+5. 访问`http://localhost:8092/admin/123/456`，可以看到页面显示了“Hello World”
+6. 访问`http://localhost:8092/admin/123/456/`，可以看到页面显示了“Hello World”
+7. 访问`http://localhost:8092/admin/123/456/789`，可以看到页面显示了“Hello World”
+8. 访问`http://localhost:8092/admin/123/456/789/`，可以看到页面显示了“Hello World”
+9. 访问`http://localhost:8092/admin/123/456/789/abc`，可以看到页面显示了“Hello World”
+10. 访问`http://localhost:8092/admin/123/456/789/abc/`，可以看到页面显示了“Hello World”
+11. 访问`http://localhost:8092/admin/123/456/789/abc/def`，可以看到页面显示了“Hello World”
+12. 访问`http://localhost:8092/admin/123/456/789/abc/def/`，可以看到页面显示了“Hello World”
+13. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi`，可以看到页面显示了“Hello World”
+14. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/`，可以看到页面显示了“Hello World”
+15. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl`，可以看到页面显示了“Hello World”
+16. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl/`，可以看到页面显示了“Hello World”
+17. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl/mno`，可以看到页面显示了“Hello World”
+18. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl/mno/`，可以看到页面显示了“Hello World”
+
+### 2.2.3. 路由规则
+在上一节中，我们使用了一个路由规则：`admin/:id`。路由规则是一个字符串，用于匹配
+URL。在上一节中，我们使用了一个路由规则，但是没有给它指定值，所以它的值是`null`。
+我们可以给路由规则指定一个默认值，这样当URL中没有传递这个规则时，就会使用默认值。
+我们可以使用`:`来指定路由规则的默认值，例如：
+```php
+Route::get('admin/:id', function($id = 0) {
+    echo 'Hello World';
+});
+```
+在上面的例子中，我们给路由规则`admin/:id`指定了默认值`0`。这样，当URL中没有传递
+`admin/:id`规则时，就会使用默认值`0`。例如：
+1. 访问`http://localhost:8092/admin`，可以看到页面显示了“Hello World”
+2. 访问`http://localhost:8092/admin/`，可以看到页面显示了“Hello World”
+3. 访问`http://localhost:8092/admin/123`，可以看到页面显示了“Hello World”
+4. 访问`http://localhost:8092/admin/123/`，可以看到页面显示了“Hello World”
+5. 访问`http://localhost:8092/admin/123/456`，可以看到页面显示了“Hello World”
+6. 访问`http://localhost:8092/admin/123/456/`，可以看到页面显示了“Hello World”
+7. 访问`http://localhost:8092/admin/123/456/789`，可以看到页面显示了“Hello World”
+8. 访问`http://localhost:8092/admin/123/456/789/`，可以看到页面显示了“Hello World”
+9. 访问`http://localhost:8092/admin/123/456/789/abc`，可以看到页面显示了“Hello World”
+10. 访问`http://localhost:8092/admin/123/456/789/abc/`，可以看到页面显示了“Hello World”
+11. 访问`http://localhost:8092/admin/123/456/789/abc/def`，可以看到页面显示了“Hello World”
+12. 访问`http://localhost:8092/admin/123/456/789/abc/def/`，可以看到页面显示了“Hello World”
+13. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi`，可以看到页面显示了“Hello World”
+14. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/`，可以看到页面显示了“Hello World”
+15. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl`，可以看到页面显示了“Hello World”
+16. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl/`，可以看到页面显示了“Hello World”
+17. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl/mno`，可以看到页面显示了“Hello World”
+18. 访问`http://localhost:8092/admin/123/456/789/abc/def/ghi/jkl/mno/`，可以看到页面显示了“Hello World”
