@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<doc.chart>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ["Boston", "Worcester", "Springfield", "Lowell", "Cambridge", "New Bedford"],
+                datasets: [{
+                    label: 'Population',
+                    data: [
+                        617594,
+                        181045,
+                        153060,
+                        106519,
+                        105162,
+                        95072
+                    ],
+                    //backgroundColor:'green',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Largest Cities In Massachusetts',
+                    fontSize: 25
+                },
+                legend: {
+                    display: true,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+        });
+    </script>
+    @endsection
+</doc.chart>
+</head>
+<body>
+    <div class="container">
+        <h1>Chart</h1>
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+</body>
+</html>
+```
+## Chart Types
+- Bar Chart
+- Horizontal Bar Chart
+- Pie Chart
+- Line Chart
+- Doughnut Chart
+- Radar Chart
+- Polar Area Chart
+### Reference
+- https://www.chartjs.org/docs/latest/
+- https://www.chartjs.org/docs/latest/getting-started/
+- https://www.chartjs.org/docs/latest/charts/
+- https://www.chartjs.org/docs/latest/configuration/
+- https://www.chartjs.org/docs/latest/axes/
+- https://www.chartjs.org/docs/latest/developers/
+- https://www.chartjs.org/docs/latest/general/
+- https://www.chartjs.org/docs/latest/charts/bar.html
+- https://www.chartjs.org/docs/latest/charts/horizontalbar.html
+- https://www.chartjs.org/docs/latest/charts/pie.html
+- https://www.chartjs.org/docs/latest/charts/line.html
+- https://www.chartjs.org/docs/latest/charts/doughnut.html
+- https://www.chartjs.org/docs/latest/charts/radar.html
+- https://www.chartjs.org/docs/latest/charts/polar.html
+- https://www.chartjs.org/docs/latest/charts/area.html
+- https://www.chartjs.org/docs/latest/charts/bubble.html
+- https://www.chartjs.org/docs/latest/charts/scatter.html
+- https://www.chartjs.org/docs/latest/charts/mixed.html
+- https://www.chartjs.org/docs/latest/charts/combo.html
+- https://www.chartjs.org/docs/latest/charts/stacked.html
+- https://www.chartjs.org/docs/latest/charts/stacked-bar.html
+- https://www.chartjs.org/docs/latest/charts/stacked-line.html
+- https://www.chartjs.org/docs/latest/charts/stacked-area.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-horizontal.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-horizontal-bar.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-horizontal-line.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-horizontal-area.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-bar.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-line.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-area.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-mixed.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-combo.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-bubble.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-scatter.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-mixed.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-combo.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-bubble.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-scatter.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-mixed.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-combo.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-bubble.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-scatter.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-mixed.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-combo.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-bubble.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-scatter.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-mixed.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-combo.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-bubble.html
+- https://www.chartjs.org/docs/latest/charts/stacked-group-scatter.html
