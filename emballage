@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<doc.source>
+<doc:meta>
+    <doc:title>Documentation</doc:title>
+    <doc:author>David Souther</doc:author>
+    <doc:email>
+        <doc:address>
+            <doc:local>david</doc:local>
+            <doc:domain>souther.us</doc:domain>
+        </doc:address>
+    </doc:email>
+    <doc:version>1.0</doc:version>
+    <doc:license>MIT</doc:license>
+    <doc:abstract>
+        <doc:p>
+            This is a test of the documentation system.
+        </doc:p>
+    </doc:abstract>
+</doc:meta>
+<doc:body>
+    <doc:section>
+        <doc:title>Section 1</doc:title>
+        <doc:p>
+            This is a paragraph.
+        </doc:p>
+        <doc:section>
+            <doc:title>Section 1.1</doc:title>
+            <doc:p>
+                This is a paragraph.
+            </doc:p>
+        </doc:section>
+    </doc:section>
+    <doc:section>
+        <doc:title>Section 2</doc:title>
+        <doc:p>
+            This is a paragraph.
+        </doc:p>
+    </doc:section>
+</doc:body>
+
+</doc.source>
+```
+3) Run `make` to generate HTML files in `./docs`.
+4) Run `make clean` to remove the generated files.
+
+## License
+##
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+## Author
+##
+David Souther <
+[
+https://github.com/dsouther](https://github.com/dsouther)>
+
+## Acknowledgements
+##
+This project was inspired by [DocBook](http://www.docbook.org/).
+
